@@ -15,7 +15,7 @@ import { BACKEND_URL } from '@/lib/constants'
 
 export async function getServerSideProps() {
 	try {
-		let res = await axios.get(`${BACKEND_URL}/api/galleries` ,{
+		let res = await axios.get(`${BACKEND_URL()}/api/galleries` ,{
 			params: {
 				'populate[event][populate][cover]' : '*',
 				'populate[event][populate][event_category]' : '*',
@@ -32,7 +32,7 @@ export async function getServerSideProps() {
 		// console.log('galleries');
 		// console.log(galleries?.event);
 
-		res = await axios.get(`${BACKEND_URL}/api/event-categories`, 
+		res = await axios.get(`${BACKEND_URL()}/api/event-categories`, 
 			{ params: { 'populate': '*' } })
 
 		const eventCategories = await res?.data?.data?.map((item) => {

@@ -16,7 +16,7 @@ import { BACKEND_URL } from '@/lib/constants'
 export async function getServerSideProps() {
 	try {
 		// Fetching blog categories
-		let res = await axios.get(`${BACKEND_URL}/api/blog-categories`, {
+		let res = await axios.get(`${BACKEND_URL()}/api/blog-categories`, {
 			params: { 'pagination[pageSize]': 100 },
 		})
 		
@@ -25,7 +25,7 @@ export async function getServerSideProps() {
 		})	
 
 		// Fetching all blogs
-		res = await axios.get(`${BACKEND_URL}/api/blog-posts`, {
+		res = await axios.get(`${BACKEND_URL()}/api/blog-posts`, {
 			params: { 'pagination[pageSize]': 100, populate: '*', sort: 'createdAt:desc' },
 		})
 
@@ -37,7 +37,7 @@ export async function getServerSideProps() {
 		const latestBlog = archiveBlogs?.[0] ;
 
 		// Fetching trending blogs
-		res = await axios.get(`${BACKEND_URL}/api/trending-blog`, {
+		res = await axios.get(`${BACKEND_URL()}/api/trending-blog`, {
 			params: {
 				'populate[blog_posts][populate][blog_category]': '*',
 				'populate[blog_posts][populate][cover_image]': '*',

@@ -31,7 +31,7 @@ export async function getServerSideProps(context) {
 	try {
 		const slug = context.params?.slug
 		let res = await axios.get(
-			`${BACKEND_URL}/api/blog-posts/?filters[slug][$eq]=${slug}&populate=*`
+			`${BACKEND_URL()}/api/blog-posts/?filters[slug][$eq]=${slug}&populate=*`
 		)
 
 		const blog = formatBlog(res?.data?.data?.[0])

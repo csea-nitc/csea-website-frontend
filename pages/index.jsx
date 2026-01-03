@@ -13,7 +13,7 @@ import { BACKEND_URL } from '@/lib/constants';
 export async function getServerSideProps() {
   try {
 
-    let res = await axios.get(`${BACKEND_URL}/api/trending-blog`, {
+    let res = await axios.get(`${BACKEND_URL()}/api/trending-blog`, {
 			params: {  
         'populate[blog_posts][populate][authors]': '*',
 				'populate[blog_posts][populate][blog_category]': '*',
@@ -22,7 +22,7 @@ export async function getServerSideProps() {
 		})
 		const trendingBlogs = res?.data?.data?.attributes?.blog_posts?.data?.map(formatBlog) ?? []
 
-    res = await axios.get(`${BACKEND_URL}/api/events?populate=*`)
+    res = await axios.get(`${BACKEND_URL()}/api/events?populate=*`)
 		const events = res?.data?.data?.map(formatEvent)
 		events?.sort((a, b) => {
       return new Date(b?.date) - new Date(a?.date); // Sort by descending order of date

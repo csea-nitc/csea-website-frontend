@@ -6,7 +6,7 @@ import { BACKEND_URL } from '@/lib/constants';
 // Fetch data from the Strapi backend
 export async function getServerSideProps() {
   try {
-    const response = await axios.get( `${BACKEND_URL}/about-us-image`, {
+    const response = await axios.get( `${BACKEND_URL()}/api/about-us-image`, {
       params: {
         populate: '*',
       },

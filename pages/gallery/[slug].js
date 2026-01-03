@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
 	try {
 		const slug = context.params?.slug
 		let res = await axios.get(
-			`${BACKEND_URL}/api/events/?filters[slug][$eq]=${slug}&populate=*`
+			`${BACKEND_URL()}/api/events/?filters[slug][$eq]=${slug}&populate=*`
 		)
 
         // console.log("Event data:", res?.data?.data);
@@ -45,7 +45,7 @@ export async function getServerSideProps(context) {
 		const event = events.length === 0 ? null : events[0]
         
         res = await axios.get (
-            `${BACKEND_URL}/api/galleries?filters[event][slug][$eq]=${slug}&populate=*`
+            `${BACKEND_URL()}/api/galleries?filters[event][slug][$eq]=${slug}&populate=*`
         )
 
         // console.log("Images data:", res?.data?.data);
