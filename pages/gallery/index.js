@@ -10,11 +10,12 @@ import BlogPostHorizontal from '@/components/blog/BlogPostHorizontal'
 import Archive from '@/components/common/Archive'
 import LatestGalleries from '@/components/gallery/LatestGalleries'
 import GalleryHorizontal from '@/components/gallery/GalleryHorizontal'
+import { BACKEND_URL } from '@/lib/constants'
 // import { log } from 'console'
 
 export async function getServerSideProps() {
 	try {
-		let res = await axios.get(`https://arete.assoc.cse.nitc.ac.in/api/galleries` ,{
+		let res = await axios.get(`${BACKEND_URL}/api/galleries` ,{
 			params: {
 				'populate[event][populate][cover]' : '*',
 				'populate[event][populate][event_category]' : '*',
@@ -31,7 +32,7 @@ export async function getServerSideProps() {
 		// console.log('galleries');
 		// console.log(galleries?.event);
 
-		res = await axios.get(`https://arete.assoc.cse.nitc.ac.in/api/event-categories`, 
+		res = await axios.get(`${BACKEND_URL}/api/event-categories`, 
 			{ params: { 'populate': '*' } })
 
 		const eventCategories = await res?.data?.data?.map((item) => {

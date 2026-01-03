@@ -5,6 +5,7 @@ import styles from '../event/event.module.css'
 import ImageGrid from '@/components/gallery/ImageGrid'
 import SectionTitle from '@/components/common/SectionTitle'
 import GalleryHeader from '@/components/gallery/GalleryHeader'
+import { BACKEND_URL } from '@/lib/constants'
 
 export default function Event({ event,slug, images }) {
 	return (
@@ -34,7 +35,7 @@ export async function getServerSideProps(context) {
 	try {
 		const slug = context.params?.slug
 		let res = await axios.get(
-			`https://arete.assoc.cse.nitc.ac.in/api/events/?filters[slug][$eq]=${slug}&populate=*`
+			`${BACKEND_URL}/api/events/?filters[slug][$eq]=${slug}&populate=*`
 		)
 
         // console.log("Event data:", res?.data?.data);
@@ -44,7 +45,7 @@ export async function getServerSideProps(context) {
 		const event = events.length === 0 ? null : events[0]
         
         res = await axios.get (
-            `https://arete.assoc.cse.nitc.ac.in/api/galleries?filters[event][slug][$eq]=${slug}&populate=*`
+            `${BACKEND_URL}/api/galleries?filters[event][slug][$eq]=${slug}&populate=*`
         )
 
         // console.log("Images data:", res?.data?.data);

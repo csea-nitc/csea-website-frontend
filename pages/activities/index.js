@@ -8,16 +8,17 @@ import SubNav from '@/components/common/SubNav'
 import LatestActivites from '@/components/activities/LatestActivites'
 import Archive from '@/components/common/Archive'
 import ActivitiesHorizontal from '@/components/activities/ActivitesHorizontal'
+import { BACKEND_URL } from '@/lib/constants'
 
 export async function getServerSideProps() {
 	try {
-		let res = await axios.get(`https://arete.assoc.cse.nitc.ac.in/api/event-categories?populate=*`)
+		let res = await axios.get(`${BACKEND_URL}/api/event-categories?populate=*`)
 
 		const eventCategories = await res?.data?.data?.map((item) => {
 			return { id: item?.id, name: item?.attributes?.name }
 		})
 
-		res = await axios.get(`https://arete.assoc.cse.nitc.ac.in/api/events?populate=*`)
+		res = await axios.get(`${BACKEND_URL}/api/events?populate=*`)
 
 		const events = res?.data?.data?.map(formatEvent)
 		events?.sort((a, b) => {

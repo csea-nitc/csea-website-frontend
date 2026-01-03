@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React from 'react';
 import MissionMain from './Mission';
+import { BACKEND_URL } from '@/lib/constants';
 
 // Fetch data from the Strapi backend
 export async function getServerSideProps() {
   try {
-    const response = await axios.get(`https://arete.assoc.cse.nitc.ac.in/api/about-us-image`, {
+    const response = await axios.get( `${BACKEND_URL}/about-us-image`, {
       params: {
         populate: '*',
       },

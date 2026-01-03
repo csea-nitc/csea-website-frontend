@@ -7,6 +7,7 @@ import styles from './event.module.css'
 import EventHeader from '@/components/event/EventHeader'
 import Link from 'next/link'
 import SectionTitle from '@/components/common/SectionTitle'
+import { BACKEND_URL } from '@/lib/constants'
 
 export default function Event({ event,slug }) {
 	return (
@@ -49,7 +50,7 @@ export async function getServerSideProps(context) {
 	try {
 		const slug = context.params?.slug
 		let res = await axios.get(
-			`https://arete.assoc.cse.nitc.ac.in/api/events/?filters[slug][$eq]=${slug}&populate=*`
+			`${BACKEND_URL}/api/events/?filters[slug][$eq]=${slug}&populate=*`
 		)
 
 		const events = res?.data?.data?.map(formatEvent)

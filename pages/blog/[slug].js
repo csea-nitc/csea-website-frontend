@@ -5,6 +5,7 @@ import RichText from '@/components/common/RichText'
 import BlogPostHeader from '@/components/blog-post/BlogPostHeader'
 
 import styles from './blog-post.module.css'
+import { BACKEND_URL } from '@/lib/constants'
 
 export default function BlogPost({ blog }) {
 	return (
@@ -30,7 +31,7 @@ export async function getServerSideProps(context) {
 	try {
 		const slug = context.params?.slug
 		let res = await axios.get(
-			`https://arete.assoc.cse.nitc.ac.in/api/blog-posts/?filters[slug][$eq]=${slug}&populate=*`
+			`${BACKEND_URL}/api/blog-posts/?filters[slug][$eq]=${slug}&populate=*`
 		)
 
 		const blog = formatBlog(res?.data?.data?.[0])
