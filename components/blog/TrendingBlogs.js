@@ -3,9 +3,6 @@ import BlogPostVertical from '@/components/blog/BlogPostVertical'
 import SectionTitle from '@/components/common/SectionTitle'
 
 import styles from './TrendingBlogs.module.css'
-import { env } from 'process'
-import { revalidatePath } from 'next/cache'
-import { stringify } from 'querystring'
 import Button from '../common/Button'
 
 // export async function getStaticProps() {
