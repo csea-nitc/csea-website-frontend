@@ -21,7 +21,7 @@ export async function getServerSideProps() {
 		})
 		
 		const blogCategories = res?.data?.data?.map((item) => {
-			return { id: item?.id, name: item?.attributes?.name }
+			return { id: item?.id, name: item?.name }
 		})	
 
 		// Fetching all blogs
@@ -39,13 +39,14 @@ export async function getServerSideProps() {
 		// Fetching trending blogs
 		res = await axios.get(`${BACKEND_URL()}/api/trending-blog`, {
 			params: {
-				'populate[blog_posts][populate][blog_category]': '*',
-				'populate[blog_posts][populate][cover_image]': '*',
-				'populate[blog_posts][populate][authors][populate][image]' : '*'
+				// 'populate[blog_posts][populate][blog_category]': '*',
+				// 'populate[blog_posts][populate][cover_image]': '*',
+				// 'populate[blog_posts][populate][authors][populate][image]' : '*'
+				populate: '*'
 				}
 		})
 		// console.log(res.data)
-		const trendingBlogs = res?.data?.data?.attributes?.blog_posts?.data?.map(formatBlog) ?? []
+		const trendingBlogs = res?.data?.data?.blog_posts?.map(formatBlog) ?? []
 
 		// console.log("trendingBlogs: ", trendingBlogs);
 		// console.log("latestBlog: ", latestBlog);
