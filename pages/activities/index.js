@@ -15,7 +15,7 @@ export async function getServerSideProps() {
 		let res = await axios.get(`${BACKEND_URL()}/api/event-categories?populate=*`)
 
 		const eventCategories = await res?.data?.data?.map((item) => {
-			return { id: item?.id, name: item?.attributes?.name }
+			return { id: item?.id, name: item?.name }
 		})
 
 		res = await axios.get(`${BACKEND_URL()}/api/events?populate=*`)
@@ -26,6 +26,10 @@ export async function getServerSideProps() {
 		});
 
 		const latestEvents = firstX(events, 3);
+		console.debug("Event Categories: ", eventCategories);
+		console.debug("Latest Events: ", latestEvents);
+		console.debug("All Events: ", events);
+
 
 		return {
 			props: {

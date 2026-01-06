@@ -14,17 +14,17 @@ export async function getServerSideProps() {
 		// Extract editions
 		const editions = res?.data?.data?.map((item) => ({
 			id: item?.id, 
-			edition: item?.attributes?.edition, 
-			release_date: item?.attributes?.release_date,
-			pdf: item?.attributes?.pdf?.data,
-			cover: (BACKEND_URL() + (item?.attributes?.cover?.data?.attributes?.formats?.large?.url ?? item?.attributes?.cover?.data?.attributes?.url)),
-			link : (BACKEND_URL() + (item?.attributes?.pdf?.data?.attributes?.url)) ?? '#',
+			edition: item?.edition, 
+			release_date: item?.release_date,
+			pdf: item?.pdf?.data,
+			cover: (BACKEND_URL() + (item?.cover?.data?.formats?.large?.url ?? item?.cover?.data?.url)),
+			link : (BACKEND_URL() + (item?.pdf?.data?.url)) ?? '#',
 		}))
 
 		// Extract threads
 		const threads = res?.data?.data?.map((item) => ({
 			id: item?.id, 
-			...item?.attributes
+			...item
 		}))
 
 		return {
