@@ -7,7 +7,7 @@ import { BACKEND_URL } from '@/lib/constants'
 
 export async function getServerSideProps() {
 	try {
-		const res = await axios.get(`${BACKEND_URL()}/api/threads`, { 
+		const res = await axios.get(`${BACKEND_URL()}/api/threads-posts`, { 
 			params: { 'populate': '*', 'sort': 'edition:desc' } 
 		})	
 
@@ -16,9 +16,9 @@ export async function getServerSideProps() {
 			id: item?.id, 
 			edition: item?.edition, 
 			release_date: item?.release_date,
-			pdf: item?.pdf?.data,
-			cover: (BACKEND_URL() + (item?.cover?.data?.formats?.large?.url ?? item?.cover?.data?.url)),
-			link : (BACKEND_URL() + (item?.pdf?.data?.url)) ?? '#',
+			pdf: item?.pdf,
+			cover: (BACKEND_URL() + (item?.cover?.formats?.large?.url ?? item?.cover?.url)),
+			link : (BACKEND_URL() + (item?.pdf?.url)) ?? '#',
 		}))
 
 		// Extract threads
