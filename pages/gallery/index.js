@@ -17,9 +17,31 @@ export async function getServerSideProps() {
 	try {
 		let res = await axios.get(`${BACKEND_URL()}/api/galleries` ,{
 			params: {
-				'populate[event][populate][cover]' : '*',
-				'populate[event][populate][event_category]' : '*',
-				'populate[images]': '*'
+				// 'populate[event][populate][cover]' : '*',
+				// 'populate[event][populate][event_category]' : '*',
+				// 'populate[images]': '*'
+
+				// 1. Event: Fetch basic details (title, slug, date)
+				'populate[event][fields][0]': 'title',
+				'populate[event][fields][1]': 'slug',
+				'populate[event][fields][2]': 'date',
+				//'populate[event][fields][3]': 'date_override',
+
+				// 2. Event -> Cover Image (Media)
+				'populate[event][populate][cover][fields][0]': 'url',
+				'populate[event][populate][cover][fields][1]': 'formats',
+				'populate[event][populate][cover][fields][2]': 'alternativeText',
+
+				// 3. Event -> Category (Relation)
+				'populate[event][populate][event_category][fields][0]': 'name',
+
+				// 4. Event -> Gallery (Media field used in utils.js)
+				//'populate[event][populate][gallery][fields][0]': 'url',
+
+				// 5. Gallery Images (Media)
+				'populate[images][fields][0]': 'url',
+				'populate[images][fields][1]': 'formats',
+				'populate[images][fields][2]': 'alternativeText'
 			}
 		})
 		// console.log(res?.data?.data[0].attributes)
@@ -36,7 +58,7 @@ export async function getServerSideProps() {
 			{ params: { 'populate': '*' } })
 
 		const eventCategories = await res?.data?.data?.map((item) => {
-			return { id: item?.id, name: item?.attributes?.name }
+			return { id: item?.id, name: item?.name }
 		})
 
 		const latestGalleries = firstThree(galleries);
@@ -71,9 +93,12 @@ export default function Gallery({ galleries, eventCategories, latestGalleries, a
 
 
 	useEffect(() => {
-		const categoryFiltered = archiveGallery?.filter((item) => {
-			if (selectedCategories?.length == 0) return true
-			return selectedCategories?.includes(item?.event_category?.id)
+        // Safe check to ensure we have data
+        if (!archiveGallery) return;
+
+		const categoryFiltered = archiveGallery.filter((item) => {
+			if (!selectedCategories || selectedCategories.length === 0) return true
+			return selectedCategories.includes(item?.event_category?.id)
 		})
 
 		if (!searchQuery) {
@@ -85,7 +110,9 @@ export default function Gallery({ galleries, eventCategories, latestGalleries, a
 		const result = fuse.search(searchQuery).map((item) => item.item)
 
 		setShownArchiveGallery(result)
-	}, [shownArchiveGallery, selectedCategories, searchQuery])
+        
+        // FIX: Removed 'shownArchiveGallery', added 'archiveGallery'
+	}, [archiveGallery, selectedCategories, searchQuery])
 
 	return (
 		<>
