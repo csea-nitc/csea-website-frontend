@@ -37,15 +37,37 @@ export async function getServerSideProps() {
 		const latestBlog = archiveBlogs?.[0] ;
 
 		// Fetching trending blogs
+		try{
 		res = await axios.get(`${BACKEND_URL()}/api/trending-blog`, {
 			params: {
 				// 'populate[blog_posts][populate][blog_category]': '*',
 				// 'populate[blog_posts][populate][cover_image]': '*',
 				// 'populate[blog_posts][populate][authors][populate][image]' : '*'
-				populate: '*'
-				}
+				// 'populate': '*'
+
+				// 1. Authors: Get name + their image (url & formats)
+				'populate[blog_posts][populate][authors][fields][0]': 'name',
+				'populate[blog_posts][populate][authors][fields][1]': 'id',
+				'populate[blog_posts][populate][authors][populate][image][fields][0]': 'url',
+				'populate[blog_posts][populate][authors][populate][image][fields][1]': 'formats',
+				'populate[blog_posts][populate][authors][populate][image][fields][2]': 'alternativeText',
+
+				// 2. Blog Category: ONLY get the name (Breaks the circular loop!)
+				'populate[blog_posts][populate][blog_category][fields][0]': 'name',
+				// 'populate[blog_posts][populate][blog_category][fields][1]': 'slug',
+
+				// 3. Cover Image: Get url + formats (Crucial for formatBlog function)
+				'populate[blog_posts][populate][cover_image][fields][0]': 'url',
+				'populate[blog_posts][populate][cover_image][fields][1]': 'formats',
+				'populate[blog_posts][populate][cover_image][fields][2]': 'alternativeText',
+				'populate[blog_posts][populate][cover_image][fields][3]': 'width',
+				'populate[blog_posts][populate][cover_image][fields][4]': 'height'	
+			}
 		})
-		// console.log(res.data)
+	} catch(e){
+		console.error("Error fetching trending blogs: ", e);
+	}
+		console.debug(res.error)
 		const trendingBlogs = res?.data?.data?.blog_posts?.map(formatBlog) ?? []
 
 		// console.log("trendingBlogs: ", trendingBlogs);
