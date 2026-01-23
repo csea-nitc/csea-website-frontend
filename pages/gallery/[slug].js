@@ -38,7 +38,7 @@ export async function getServerSideProps(context) {
 			`${BACKEND_URL()}/api/events/?filters[slug][$eq]=${slug}&populate=*`
 		)
 
-        // console.log("Event data:", res?.data?.data);
+        // console.debug("Event data:", res?.data?.data);
 
 
 		const events = res?.data?.data?.map(formatEvent)
@@ -48,10 +48,10 @@ export async function getServerSideProps(context) {
             `${BACKEND_URL()}/api/galleries?filters[event][slug][$eq]=${slug}&populate=*`
         )
 
-        // console.log("Images data:", res?.data?.data);
+        // console.debug("Images data:", res?.data?.data);
 
         
-        const images = res?.data?.data[0]?.attributes?.images?.data?.map(formatImages);
+        const images = res?.data?.data[0]?.images?.map(formatImages);
 
 		return { 
 			props: { 
