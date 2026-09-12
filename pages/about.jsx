@@ -13,9 +13,11 @@ export async function getServerSideProps() {
       },
     });
 
+    console.log(response.data.data.img);
+
     // Extract image URL from the response
-    const imgData = response.data?.data?.attributes?.img?.data?.attributes?.url;
-    const AboutImg = imgData ? BACKEND_URL() + '/' + imgData : null;
+    const imgData = response.data?.data?.img?.url;
+    const AboutImg = imgData ? BACKEND_URL() + imgData : null;
 
     return {
       props: {
