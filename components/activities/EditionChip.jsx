@@ -4,13 +4,20 @@ import styles from './EditionChip.module.css'
 const EditionChip = ({number, onClick, isSelected, date}) => {
   return (
     <>
-    <div className={`${styles.container} ${isSelected ? styles.selected : ''} flex gap-2`} onClick={onClick}>
+    <div className={`${styles.container} ${isSelected ? styles.selected : ''}`} onClick={onClick}>
+      {/* the multiple spans are used to align stuff using the semi-colon */}
       <img src='/svgs/tag-triangle.svg' alt='triangle' />
-      Edition {number} : {date}
+      <span>Edition</span>
+      <span>{number}</span>
+      <span>:</span>
+      <span>{date}</span>
     </div>
-    <div className={`${styles.containerMobile} ${isSelected ? styles.selectedMobile : ''} flex gap-2`} onClick={onClick}>
+    <div className={`${styles.containerMobile} ${isSelected ? styles.selectedMobile : ''}`} onClick={onClick}>
       <img src='/svgs/tag-triangle.svg' alt='triangle' />
-      Ed.{number} : {date}
+      <span>Ed.</span>
+      <span>{number}</span>
+      <span>:</span>
+      <span>{date}</span>
     </div>
     </>
   )
