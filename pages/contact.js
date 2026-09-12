@@ -44,7 +44,9 @@ export default function contact() {
 					</div>
 					<div className={styles.content}>
 						<Tag value={'email'} />
-						csea@nitc.ac.in
+						<a href="mailto:csea@nitc.ac.in" target="_blank" rel="noopener noreferrer" className={styles.link}>
+							csea@nitc.ac.in
+						</a>
 					</div>
 					<div className={styles.content}>
 						<Tag value={'socials'} />
