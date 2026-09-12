@@ -49,12 +49,12 @@ export default function contact() {
 					<div className={styles.content}>
 						<Tag value={'socials'} />
 						<div className={styles.logos}>
-							<div className={styles.logo}>
-								<img src='/svgs/X.svg' />
-							</div>
-							<div className={styles.logo}>
+							<a href="https://www.instagram.com/csea.nitc" target="_blank" rel="noopener noreferrer" className={styles.logo}>
 								<img src='/svgs/instagram.svg' />
-							</div>
+							</a>
+							<a href="https://www.linkedin.com/company/csea-nitc" target="_blank" rel="noopener noreferrer" className={styles.logo}>
+								<img src='/svgs/linkedin.svg' />
+							</a>
 						</div>
 					</div>
 				</div>
