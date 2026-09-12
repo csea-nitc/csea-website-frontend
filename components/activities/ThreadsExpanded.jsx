@@ -42,6 +42,7 @@ const ThreadsExpanded = ({ edition }) => {
           src={edition?.cover} 
           alt="Cover"
           fill={true}
+          unoptimized
           style={{ border: '2px dashed gray', padding: '4px' }}
         />
       </div>
