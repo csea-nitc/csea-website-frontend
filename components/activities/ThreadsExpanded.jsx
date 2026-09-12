@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styles from './ThreadsExpanded.module.css'
 import Button from '../common/Button'
+import Image from 'next/image'
 
 const ThreadsExpanded = ({ edition }) => {
 
@@ -33,8 +34,16 @@ const ThreadsExpanded = ({ edition }) => {
 
     <div key={edition?.edition} className={` ${styles.container} flex justify-center`}>
 
-      <div className={styles.coverContainer}>
-        <div  className={styles.cover} style={{ background: `url(${edition?.cover})`, backgroundSize: 'contain' }} ></div>
+      {/* <div className={styles.coverContainer}>
+        <div  className={styles.cover} style={{ background: `url(${edition?.cover})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat' }} ></div>
+      </div> */}
+      <div className={styles.cover}>
+        <Image 
+          src={edition?.cover} 
+          alt="Cover"
+          fill={true}
+          style={{ border: '2px dashed gray', padding: '4px' }}
+        />
       </div>
 
       <div className={styles.description}>
