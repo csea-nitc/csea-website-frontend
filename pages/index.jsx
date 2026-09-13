@@ -1,12 +1,7 @@
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
-import TrendingBlogs from '@/components/blog/TrendingBlogs';
 import { firstThree, formatBlog, formatEvent } from '@/lib/utils';
 import axios from 'axios';
 import LatestActivites from '@/components/activities/LatestActivites';
 import AboutMain from '@/components/main/AboutMain';
-import Button from '@/components/common/Button';
-import Threads from './activities/threads';
 import ThreadsMain from '@/components/main/Threads';
 import { BACKEND_URL } from '@/lib/constants';
 

@@ -13,7 +13,7 @@ const ThreadsMain = () => {
         <div className="gap-4 flex flex-col justify-end ">
           <h1 className='text-6xl font-extrabold tracking-tighter font-ibmplexmono flex '>threads<p className=' font-mono'>{'.'}</p></h1>
           <p className='bg-[var(--image-bg)] font-ibmplexmono md:text-xl text-sm w-max px-2 '>Annual technology magazine of CSEA </p>
-          <Button text={'Learn More'} link={'/activities/threads'} />
+          <Button text={'Learn More'} link={'/threads'} />
         </div>
       
     </div>

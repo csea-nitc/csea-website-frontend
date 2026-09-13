@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import SubNav from '@/components/common/SubNav'
 import ThreadsNav from '@/components/activities/ThreadsNav'
 import ThreadsExpanded from '@/components/activities/ThreadsExpanded'
@@ -48,23 +48,12 @@ export async function getServerSideProps() {
 export default function Threads({ editions, threads }) {
 	// Initialize state
 	const [activeEdition, setActiveEdition] = useState(editions[0]?.edition ?? 0)
-	const [activeEditionData, setActiveEditionData] = useState(null)
-
-	// Update activeEditionData to the single thread matching the active edition
-	useEffect(() => {
-		const selectedThread = editions.find((item) => item?.edition === activeEdition)
-		setActiveEditionData(selectedThread)
-	}, [activeEdition, threads])
+	const activeEditionData = editions.find((item) => item?.edition === activeEdition)
 
 	return (
 		<>
 			<SubNav
-				pageTitle='Activities'
-				links={[
-					{ name: 'Events', href: '/activities#events' },
-					{ name: 'Threads', href: '/activities/threads' },
-					{ name: 'Interview Diaries', href: 'https://sites.google.com/nitc.ac.in/interviewdiaries/home' },
-				]}
+				pageTitle='Threads'
 			/>
 
 			<div className='flex w-full h-max '>
@@ -79,7 +68,7 @@ export default function Threads({ editions, threads }) {
 				<ThreadsExpanded edition={activeEditionData} />	
 			</div>
 
-			<div style={{ height: 400 }}></div>
+			{/* <div style={{ height: 400 }}></div> */}
 		</>
 	)
 }

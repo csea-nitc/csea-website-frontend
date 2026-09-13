@@ -87,8 +87,7 @@ export default function Activities({ latestEvents, eventCategories, events }) {
 			<SubNav
 				pageTitle='Activities'
 				links={[
-					{ name: 'Events', href: '/activities#events' },
-					{ name: 'Threads', href: '/activities/threads' },
+					// { name: 'Events', href: '/activities#events' },
 					{ name: 'Interview Diaries', href: 'https://sites.google.com/nitc.ac.in/interviewdiaries/home' },
 				]}
 			/>

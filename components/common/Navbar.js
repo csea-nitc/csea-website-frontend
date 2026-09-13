@@ -8,11 +8,12 @@ import { useState } from 'react'
 
 const links = [
 	{ name: 'Home', href: '/' },
-	{ name: 'About', href: '/about' },
-	{ name: 'Blog', href: '/blog' },
+	// { name: 'Blog', href: '/blog' },
+	{ name: 'Threads', href: '/threads' },
 	{ name: 'Activities', href: '/activities' },
 	{ name: 'Gallery', href: '/gallery' },
 	{ name: 'Contact', href: '/contact' },
+	{ name: 'About', href: '/about' },
 ]
 
 export default function Navbar() {
