@@ -1,35 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import MissionMain from './Mission';
-import { BACKEND_URL } from '@/lib/constants';
-
-// Fetch data from the Strapi backend
-export async function getServerSideProps() {
-  try {
-    const response = await axios.get( `${BACKEND_URL()}/api/about-us-image`, {
-      params: {
-        populate: '*',
-      },
-    });
-
-    // Extract image URL from the response
-    const imgData = response.data?.data?.attributes?.img?.data?.attributes?.url;
-    const AboutImg = imgData ? BACKEND_UR() + imgData : null;
-
-    return {
-      props: {
-        AboutImg,
-      },
-    };
-  } catch (err) {
-    console.error(err);
-    return {
-      props: {
-        AboutImg: null,
-      },
-    };
-  }
-}
 
 const AboutMain = ({ AboutImg }) => {
   return (

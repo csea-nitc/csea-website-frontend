@@ -22,20 +22,27 @@ export async function getServerSideProps() {
 		})
 		const trendingBlogs = res?.data?.data?.blog_posts?.map(formatBlog) ?? []
 
-    console.log('trendingBlogs : ', res.data.data)
-
     res = await axios.get(`${BACKEND_URL()}/api/events?populate=*`)
 		const events = res?.data?.data?.map(formatEvent)
 
 		events?.sort((a, b) => {
       return new Date(b?.date) - new Date(a?.date); // Sort by descending order of date
-  });
+    });
 		const latestEvents = firstThree(events);
+
+    const response = await axios.get( `${BACKEND_URL()}/api/about-us-image`, {
+      params: {
+        populate: '*',
+      },
+    });
+    const imgData = response.data?.data?.img?.url;
+    const AboutImg = imgData ? BACKEND_URL() + imgData : null;
 
     return {
       props: {
         trendingBlogs: trendingBlogs ?? [],
-        latestEvents: latestEvents ?? []
+        latestEvents: latestEvents ?? [],
+        AboutImg: AboutImg ?? null,
       }
     };
   } catch (err) {
@@ -50,13 +57,13 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Home({ trendingBlogs, latestEvents }) {
+export default function Home({ trendingBlogs, latestEvents, AboutImg }) {
 
   return (
     <main>
       <section className="h-max absolute top-0 flex flex-col justify-center w-full pt-10">
 
-        <AboutMain />
+        <AboutMain AboutImg={AboutImg} />
         <ThreadsMain />
         <LatestActivites latestEvents={latestEvents} title={'Latest Events'} more />
 
