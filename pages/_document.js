@@ -3,9 +3,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
 	return (
-		<Html lang='en' 
-			title='CSEA NIT Calicut - Computer Science &amp; Engineering Association'
-			>
+		<Html lang='en'>
 			<Head>
 				{/* <title>CSEA NIT Calicut - Computer Science &amp; Engineering Association</title> */}
 				<link rel='icon' type='image/x-icon' href='favicon.png'></link>
