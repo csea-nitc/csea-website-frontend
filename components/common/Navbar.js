@@ -10,6 +10,7 @@ const links = [
 	{ name: 'Home', href: '/' },
 	// { name: 'Blog', href: '/blog' },
 	{ name: 'Threads', href: '/threads' },
+	{ name: 'Yearbook', href: '/yearbook' },
 	{ name: 'Activities', href: '/activities' },
 	{ name: 'Gallery', href: '/gallery' },
 	{ name: 'Contact', href: '/contact' },

@@ -1,0 +1,10 @@
+.navcontainer{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    min-height: calc(100vh - var(--navbar-height) - var(--sub-nav-height));
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    background-color: var(--image-bg);
+}
