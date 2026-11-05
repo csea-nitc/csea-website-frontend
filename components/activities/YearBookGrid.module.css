@@ -1,0 +1,73 @@
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 32px 24px;
+    width: 100%;
+    padding: 32px 24px 64px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.cover {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 7;
+    background-color: var(--image-bg);
+    background-clip: content-box;
+    padding: 4px;
+    border: 2px dashed gray;
+    transition: border-color 150ms ease;
+}
+
+/* The image sits inside the dashed frame, matching the Threads cover */
+.coverImage {
+    padding: 4px;
+    object-fit: cover;
+}
+
+.title {
+    margin-top: 12px;
+    font-family: var(--font-ibm);
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.cardLink:hover .cover,
+.cardLink:focus-visible .cover {
+    border-color: var(--primary);
+}
+
+.cardLink:hover .title,
+.cardLink:focus-visible .title {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.empty {
+    width: 100%;
+    padding: 64px 24px;
+    font-family: var(--font-ibm);
+    font-size: 14px;
+    text-align: center;
+    color: var(--primary-light);
+}
+
+@media screen and (max-width: 770px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 16px;
+        padding: 24px 16px 48px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+}
